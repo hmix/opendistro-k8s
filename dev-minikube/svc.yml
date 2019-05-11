@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: opendistro-endpoint
+  namespace: opendistro
+spec:
+  type: NodePort
+  selector:
+    app: opendistro-for-elasticsearch
+    k8s-app: opendistro-for-elasticsearch
+  ports:
+    - protocol: TCP
+      port: 9200
+      nodePort: 30200
+      name: opendistro-endpoint-es
+    - protocol: TCP
+      port: 9600
+      nodePort: 30600
+      name: opendistro-endpoint-perf
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: opendistro-kibana-endpoint
+  namespace: opendistro
+spec:
+  type: NodePort
+  selector:
+    app: opendistro-kibana
+    k8s-app: opendistro-kibana
+  ports:
+    - protocol: TCP
+      port: 5601
+      nodePort: 30601
+      name: opendistro-kibana-ui
+
